@@ -43,4 +43,7 @@ routes.post(
   validate(validators.Purchase),
   controllers.PurchaseController.store
 );
+routes.get("/purchase", controllers.ApproveController.show);
+routes.put("/purchase/:id", controllers.ApproveController.put);
+
 module.exports = routes;

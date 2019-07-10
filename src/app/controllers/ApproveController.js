@@ -5,13 +5,11 @@ class ApproveController {
   async show(req, res) {
     const IntensionAd = await Purchase.find({
       author: req.userId
-    });
+    }).populate("ad");
 
-    //problemas ao filtrar, verificar se ja foi vendido ou não
-    const Intensions = IntensionAd.filter(async data => {
-      var Add = await Ad.findById(data.ad);
-
-      if (!Add.purchasedBy) return data;
+    //Filtrar entre vendidos ou não.
+    const Intensions = IntensionAd.filter(data => {
+      if (!data.ad.purchasedBy) return data;
     });
 
     //Mostra todas as intenções de compra dos itens desse vendedor
